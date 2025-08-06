@@ -29,11 +29,11 @@ const getStatValue = (stat: any) => {
 };
 
 interface MatchDetailsProps {
-  params: { fixtureId: string };
+  params: Promise<{ fixtureId: string }>;
 }
 
 const MatchDetails: React.FC<MatchDetailsProps> = ({ params }) => {
-  const fixtureId = params.fixtureId;
+  const { fixtureId } = React.use(params);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [stats, setStats] = useState<any[]>([]);

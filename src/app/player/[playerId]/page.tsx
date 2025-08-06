@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import { fetchPlayerProfile } from '../../../lib/api';
 import { Box, Typography, Avatar, Card, CardContent, CircularProgress, Alert } from '@mui/material';
 
@@ -8,7 +8,16 @@ interface PlayerPageProps {
 }
 
 const PlayerPage: React.FC<PlayerPageProps> = ({ params }) => {
-  const playerId = Number(params.playerId);
+  // Support both direct and use(params) access for compatibility
+  let playerId: string;
+  if (typeof (params as any).then === 'function') {
+    // params is a Promise, unwrap with use()
+    playerId = (use(params) as { playerId: string }).playerId;
+  } else {
+    // params is a plain object
+    playerId = (params as { playerId: string }).playerId;
+  }
+  const playerIdNum = Number(playerId);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [player, setPlayer] = useState<any>(null);
@@ -16,7 +25,7 @@ const PlayerPage: React.FC<PlayerPageProps> = ({ params }) => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetchPlayerProfile(playerId)
+    fetchPlayerProfile(playerIdNum)
       .then(data => {
         setPlayer(data?.response?.[0]?.player || null);
         setLoading(false);
@@ -25,7 +34,7 @@ const PlayerPage: React.FC<PlayerPageProps> = ({ params }) => {
         setError(err.message);
         setLoading(false);
       });
-  }, [playerId]);
+  }, [playerIdNum]);
 
   if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}><CircularProgress /></Box>;
   if (error) return <Alert severity="error">{error}</Alert>;

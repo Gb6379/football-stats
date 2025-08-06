@@ -1,17 +1,6 @@
 export async function fetchFixtures(league: number, season: number) {
-  const apiKey =
-    process.env.REACT_APP_FOOTBALL_API_KEY ||
-    "0774d39c344ba71e677b524f4926d1aa";
-  const apiHost =
-    process.env.REACT_APP_FOOTBALL_API_HOST || "v3.football.api-sports.io";
-  const url = `https://${apiHost}/fixtures?league=${league}&season=${season}`;
-
-  const response = await fetch(url, {
-    headers: {
-      "x-rapidapi-key": apiKey,
-      "x-rapidapi-host": apiHost,
-    },
-  });
+  const url = `/api/fixtures?league=${league}&season=${season}`;
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch fixtures");
   }
@@ -20,21 +9,8 @@ export async function fetchFixtures(league: number, season: number) {
 }
 
 export async function fetchLeaguesByCountry(country: string) {
-  const apiKey =
-    process.env.REACT_APP_FOOTBALL_API_KEY ||
-    "0774d39c344ba71e677b524f4926d1aa";
-  const apiHost =
-    process.env.REACT_APP_FOOTBALL_API_HOST || "v3.football.api-sports.io";
-  const url = `https://${apiHost}/leagues?country=${encodeURIComponent(
-    country
-  )}`;
-
-  const response = await fetch(url, {
-    headers: {
-      "x-rapidapi-key": apiKey,
-      "x-rapidapi-host": apiHost,
-    },
-  });
+  const url = `/api/leagues?country=${encodeURIComponent(country)}`;
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch leagues");
   }
@@ -43,19 +19,8 @@ export async function fetchLeaguesByCountry(country: string) {
 }
 
 export async function fetchFixtureStatistics(fixtureId: number) {
-  const apiKey =
-    process.env.REACT_APP_FOOTBALL_API_KEY ||
-    "0774d39c344ba71e677b524f4926d1aa";
-  const apiHost =
-    process.env.REACT_APP_FOOTBALL_API_HOST || "v3.football.api-sports.io";
-  const url = `https://${apiHost}/fixtures/statistics?fixture=${fixtureId}`;
-
-  const response = await fetch(url, {
-    headers: {
-      "x-rapidapi-key": apiKey,
-      "x-rapidapi-host": apiHost,
-    },
-  });
+  const url = `/api/statistics?fixture=${fixtureId}`;
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch fixture statistics");
   }
@@ -85,22 +50,14 @@ export async function fetchFixtureDetails(fixtureId: number) {
 }
 
 export async function fetchPlayerProfile(playerId: number) {
-  const apiKey =
-    process.env.REACT_APP_FOOTBALL_API_KEY ||
-    "0774d39c344ba71e677b524f4926d1aa";
-  const apiHost =
-    process.env.REACT_APP_FOOTBALL_API_HOST || "v3.football.api-sports.io";
-  const url = `https://${apiHost}/players/profiles?player=${playerId}`;
+  // Updated to use backend proxy route
+  const url = `/api/players?player=${playerId}`;
 
-  const response = await fetch(url, {
-    headers: {
-      "x-rapidapi-key": apiKey,
-      "x-rapidapi-host": apiHost,
-    },
-  });
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error("Failed to fetch player profile");
   }
   const data = await response.json();
   return data;
 }
+// TODO: Proxy routes for fixtures, leagues, etc. should be implemented and used here for full CORS safety.
