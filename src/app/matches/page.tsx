@@ -201,84 +201,182 @@ const Matches: React.FC = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column',bgcolor: '#181A20', color: '#fff', minHeight: '100vh', px: { xs: 1, md: 4 }, py: 3 }}>
       <Typography variant="h4" gutterBottom>
         Matches
       </Typography>
-      <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2, flexWrap: 'wrap' }}>
-        <FormControl size="small" sx={{ minWidth: 120 }}>
-          <InputLabel id="country-label">Country</InputLabel>
-          <Select
-            labelId="country-label"
-            value={country}
-            label="Country"
-            onChange={e => setCountry(e.target.value)}
-          >
-            {COUNTRIES.map(c => (
-              <MenuItem key={c.code} value={c.code}>{c.label}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl size="small" sx={{ minWidth: 180, ml: 2 }}>
-          <InputLabel id="league-label">League</InputLabel>
-          <Select
-            labelId="league-label"
-            value={league || ''}
-            label="League"
-            onChange={e => setLeague(Number(e.target.value))}
-            disabled={leaguesLoading || leaguesError !== null}
-          >
-            {leagues.map((l: any) => (
-              <MenuItem key={l.id} value={l.id}>
-                <Stack direction="row" alignItems="center" spacing={1}>
-                  {l.logo && <Avatar src={l.logo} alt={l.name} sx={{ width: 24, height: 24 }} />}
-                  <span>{l.name}</span>
-                </Stack>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl size="small" sx={{ minWidth: 120, ml: 2 }}>
-          <InputLabel id="season-label">Season</InputLabel>
-          <Select
-            labelId="season-label"
-            value={season}
-            label="Season"
-            onChange={e => setSeason(Number(e.target.value))}
-          >
-            {SEASONS.map(s => (
-              <MenuItem key={s} value={s}>{s}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl size="small" sx={{ minWidth: 180, ml: 2 }}>
-          <InputLabel id="team-label">Team</InputLabel>
-          <Select
-            labelId="team-label"
-            value={team}
-            label="Team"
-            onChange={e => setTeam(e.target.value)}
-          >
-            <MenuItem value="all">All Teams</MenuItem>
-            {teams.map((t: any) => (
-              <MenuItem key={t.id} value={t.id}>{t.name}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Button variant="outlined" onClick={handlePrevDay} disabled={!selectedDate || selectedDate === ''}>Previous Day</Button>
-        <TextField
-          type="date"
-          value={selectedDate || ''}
-          onChange={e => setSelectedDate(e.target.value)}
-          size="small"
-          sx={{ width: 150 }}
-        />
-        <Button variant="outlined" onClick={handleNextDay} disabled={!selectedDate || selectedDate === ''}>Next Day</Button>
-        <Button variant="outlined" color="secondary" onClick={handleClearDate} disabled={!selectedDate || selectedDate === ''}>Clear Date</Button>
-      </Stack>
+             <Box sx={{ mb: 2, bgcolor: '#23252B', borderRadius: 2, p: 2 }}>
+         <Stack direction="row" spacing={2} alignItems="center" sx={{ flexWrap: 'wrap' }}>
+           <FormControl size="small" sx={{ 
+               width: 150, 
+               bgcolor: '#23252B', 
+               input: { color: '#fff' }, 
+               label: { color: '#fff' }, 
+               borderRadius: 1, 
+               '& .MuiOutlinedInput-root': { 
+                 '& fieldset': { borderColor: '#B5B9C4FF !important' },
+                 '&:hover fieldset': { borderColor: '#1E90FF !important' },
+                 '&.Mui-focused fieldset': { borderColor: '#B5B9C4FF !important' }
+               },
+               '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#1E90FF !important'
+               },
+               '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#B5B9C4FF !important'
+               }
+             }}>
+             <InputLabel id="country-label" sx={{ color: '#fff' }}>Country</InputLabel>
+             <Select
+               labelId="country-label"
+               value={country}
+               label="Country"
+               onChange={e => setCountry(e.target.value)}
+               sx={{ color: '#fff', bgcolor: '#23252B', '.MuiSvgIcon-root': { color: '#fff' } }}
+               MenuProps={{ PaperProps: { sx: { bgcolor: '#23252B', color: '#fff' } } }}
+             >
+               {COUNTRIES.map(c => (
+                 <MenuItem key={c.code} value={c.code}>{c.label}</MenuItem>
+               ))}
+             </Select>
+           </FormControl>
+           <FormControl size="small" sx={{ 
+               minWidth: 180, 
+               bgcolor: '#23252B', 
+               input: { color: '#fff' }, 
+               label: { color: '#fff' }, 
+               borderRadius: 1, 
+               '& .MuiOutlinedInput-root': { 
+                 '& fieldset': { borderColor: '#B5B9C4FF !important' },
+                 '&:hover fieldset': { borderColor: '#1E90FF !important' },
+                 '&.Mui-focused fieldset': { borderColor: '#B5B9C4FF !important' }
+               },
+               '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#1E90FF !important'
+               },
+               '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#B5B9C4FF !important'
+               }
+             }}>
+             <InputLabel id="league-label" sx={{ color: '#fff' }}>League</InputLabel>
+             <Select
+               labelId="league-label"
+               value={league || ''}
+               label="League"
+               onChange={e => setLeague(Number(e.target.value))}
+               disabled={leaguesLoading || leaguesError !== null}
+               sx={{ color: '#fff', bgcolor: '#23252B', '.MuiSvgIcon-root': { color: '#fff' } }}
+               MenuProps={{ PaperProps: { sx: { bgcolor: '#23252B', color: '#fff' } } }}
+             >
+               {leagues.map((l: any) => (
+                 <MenuItem key={l.id} value={l.id}>
+                   <Stack direction="row" alignItems="center" spacing={1}>
+                     {l.logo && <Avatar src={l.logo} alt={l.name} sx={{ width: 24, height: 24 }} />}
+                     <span>{l.name}</span>
+                   </Stack>
+                 </MenuItem>
+               ))}
+             </Select>
+           </FormControl>
+           <FormControl size="small" sx={{ 
+               width: 150, 
+               bgcolor: '#23252B', 
+               input: { color: '#fff' }, 
+               label: { color: '#fff' }, 
+               borderRadius: 1, 
+               '& .MuiOutlinedInput-root': { 
+                 '& fieldset': { borderColor: '#B5B9C4FF !important' },
+                 '&:hover fieldset': { borderColor: '#1E90FF !important' },
+                 '&.Mui-focused fieldset': { borderColor: '#B5B9C4FF !important' }
+               },
+               '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#1E90FF !important'
+               },
+               '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#B5B9C4FF !important'
+               }
+             }}>
+             <InputLabel id="season-label" sx={{ color: '#fff' }}>Season</InputLabel>
+             <Select
+               labelId="season-label"
+               value={season}
+               label="Season"
+               onChange={e => setSeason(Number(e.target.value))}
+               sx={{ color: '#fff', bgcolor: '#23252B', '.MuiSvgIcon-root': { color: '#fff' } }}
+               MenuProps={{ PaperProps: { sx: { bgcolor: '#23252B', color: '#fff' } } }}
+             >
+               {SEASONS.map(s => (
+                 <MenuItem key={s} value={s}>{s}</MenuItem>
+               ))}
+             </Select>
+           </FormControl>
+           <FormControl size="small" sx={{ 
+               width: 150, 
+               bgcolor: '#23252B', 
+               input: { color: '#fff' }, 
+               label: { color: '#fff' }, 
+               borderRadius: 1, 
+               '& .MuiOutlinedInput-root': { 
+                 '& fieldset': { borderColor: '#B5B9C4FF !important' },
+                 '&:hover fieldset': { borderColor: '#1E90FF !important' },
+                 '&.Mui-focused fieldset': { borderColor: '#B5B9C4FF !important' }
+               },
+               '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#1E90FF !important'
+               },
+               '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#B5B9C4FF !important'
+               }
+             }}>
+             <InputLabel id="team-label" sx={{ color: '#fff' }}>Team</InputLabel>
+             <Select
+               labelId="team-label"
+               value={team}
+               label="Team"
+               onChange={e => setTeam(e.target.value)}
+               sx={{ color: '#fff', bgcolor: '#23252B', '.MuiSvgIcon-root': { color: '#fff' } }}
+               MenuProps={{ PaperProps: { sx: { bgcolor: '#23252B', color: '#fff' } } }}
+             >
+               <MenuItem value="all">All Teams</MenuItem>
+               {teams.map((t: any) => (
+                 <MenuItem key={t.id} value={t.id}>{t.name}</MenuItem>
+               ))}
+             </Select>
+           </FormControl>
+           <Button variant="outlined" onClick={handlePrevDay} disabled={!selectedDate || selectedDate === ''} sx={{ color: '#fff', borderColor: '#fff', bgcolor: '#b0b3b8', '&:hover': { bgcolor: '#1E90FF22', borderColor: '#1E90FF' } }}>Previous Day</Button>
+           <TextField
+             type="date"
+             value={selectedDate || ''}
+             onChange={e => setSelectedDate(e.target.value)}
+             size="small"
+             sx={{ 
+               width: 150, 
+               bgcolor: '#23252B', 
+               input: { color: '#fff' }, 
+               label: { color: '#fff' }, 
+               borderRadius: 1, 
+               '& .MuiOutlinedInput-root': { 
+                 '& fieldset': { borderColor: '#B5B9C4FF !important' },
+                 '&:hover fieldset': { borderColor: '#1E90FF !important' },
+                 '&.Mui-focused fieldset': { borderColor: '#B5B9C4FF !important' }
+               },
+               '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#1E90FF !important'
+               },
+               '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                 borderColor: '#B5B9C4FF !important'
+               }
+             }}
+             InputLabelProps={{ style: { color: '#fff' } }}
+           />
+           <Button variant="outlined" onClick={handleNextDay} disabled={!selectedDate || selectedDate === ''} sx={{ color: '#fff', borderColor: '#fff', bgcolor: '#b0b3b8', '&:hover': { bgcolor: '#1E90FF22', borderColor: '#1E90FF' } }}>Next Day</Button>
+         </Stack>
+         <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+           <Button variant="outlined" color="secondary" onClick={handleClearDate} disabled={!selectedDate || selectedDate === ''} sx={{ color: '#fff', borderColor: '#fff', bgcolor: '#b0b3b8', '&:hover': { bgcolor: '#1E90FF22', borderColor: '#1E90FF' } }}>Clear Date</Button>
+         </Stack>
+       </Box>
       {leaguesLoading && <Typography>Loading leagues...</Typography>}
       {leaguesError && <Alert severity="error">{leaguesError}</Alert>}
-      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>
+      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2, bgcolor: '#23252B', borderRadius: 2, '& .MuiTab-root': { color: '#b0b3b8', fontWeight: 700 }, '& .Mui-selected': { color: '#fff' }, '& .MuiTabs-indicator': { bgcolor: '#1E90FF' } }}>
         <Tab label="All" />
         <Tab label="Favorites" />
         <Tab label="Competitions" />
@@ -290,6 +388,7 @@ const Matches: React.FC = () => {
           exclusive
           onChange={(_, v) => v && setStatus(v)}
           size="small"
+          sx={{ bgcolor: '#23252B', borderRadius: 2, '& .MuiToggleButton-root': { color: '#b0b3b8', borderColor: '#444' }, '& .Mui-selected': { color: '#fff', bgcolor: '#1E90FF22' } }}
         >
           {statusOptions.map(opt => (
             <ToggleButton key={opt} value={opt}>{opt}</ToggleButton>
@@ -308,11 +407,12 @@ const Matches: React.FC = () => {
         grouped.map(group => (
           <List
             key={group.league}
+            sx={{ bgcolor: '#23252B', borderRadius: 2, mb: 3, color: '#fff' }}
             subheader={
-              <ListSubheader component="div" sx={{ bgcolor: 'background.paper' }}>
+              <ListSubheader component="div" sx={{ bgcolor: '#23252B', color: '#fff', fontWeight: 700 }}>
                 <Stack direction="row" alignItems="center" spacing={1}>
-                  <SportsSoccerIcon fontSize="small" />
-                  <Typography variant="subtitle1">{group.country} - {group.league}</Typography>
+                  <SportsSoccerIcon fontSize="small" sx={{ color: '#1E90FF' }} />
+                  <Typography variant="subtitle1" sx={{ color: '#fff' }}>{group.country} - {group.league}</Typography>
                 </Stack>
               </ListSubheader>
             }
@@ -321,7 +421,7 @@ const Matches: React.FC = () => {
               <React.Fragment key={match.id}>
                 <ListItem
                   secondaryAction={
-                    <IconButton edge="end" color={match.isFavorite ? 'warning' : 'default'}>
+                    <IconButton edge="end" sx={{ color: match.isFavorite ? '#FFD700' : '#fff', bgcolor: '#23252B', '&:hover': { bgcolor: '#1E90FF22' } }}>
                       {match.isFavorite ? <StarIcon /> : <StarBorderIcon />}
                     </IconButton>
                   }
@@ -329,39 +429,36 @@ const Matches: React.FC = () => {
                     borderRadius: 2,
                     mb: 1,
                     boxShadow: 1,
-                    bgcolor: 'background.paper',
+                    bgcolor: '#23252BFF',
                     p: 1.5,
                     cursor: 'pointer',
+                    color: '#fff',
                   }}
                   onClick={() => router.push(`/match/${match.id}`)}
                 >
                   <ListItemText
                     primary={
                       <Stack direction="row" spacing={2} alignItems="center" width="100%" justifyContent="space-between">
-                        <Chip label={match.time} size="small" color={match.status === 'Live' ? 'error' : 'default'} sx={{ minWidth: 60 }} />
+                        <Chip label={match.time} size="small" sx={{ minWidth: 60, bgcolor: '#B7B8BDFF', color: '#fff', fontWeight: 700 }} />
                         <Stack direction="row" spacing={1} alignItems="center" width={180} justifyContent="flex-end">
-                          <Avatar src={match.homeShield} alt={match.homeTeam} sx={{ width: 32, height: 32, bgcolor: 'grey.100' }} />
-                          <Typography sx={{ minWidth: 80, textAlign: 'right' }}>{match.homeTeam}</Typography>
+                          <Avatar src={match.homeShield} alt={match.homeTeam} sx={{ width: 32, height: 32, bgcolor: '#17191FFF' }} />
+                          <Typography sx={{ minWidth: 80, textAlign: 'right', color: '#fff' }}>{match.homeTeam}</Typography>
                         </Stack>
-                        <Typography fontWeight="bold" sx={{ fontSize: 20, minWidth: 60, textAlign: 'center' }}>
+                        <Typography fontWeight="bold" sx={{ fontSize: 20, minWidth: 60, textAlign: 'center', color: '#fff' }}>
                           {match.homeScore !== undefined && match.homeScore !== null ? match.homeScore : '-'}
                           {' : '}
                           {match.awayScore !== undefined && match.awayScore !== null ? match.awayScore : '-'}
                         </Typography>
                         <Stack direction="row" spacing={1} alignItems="center" width={180} justifyContent="flex-start">
-                          <Typography sx={{ minWidth: 80, textAlign: 'left' }}>{match.awayTeam}</Typography>
-                          <Avatar src={match.awayShield} alt={match.awayTeam} sx={{ width: 32, height: 32, bgcolor: 'grey.100' }} />
+                          <Typography sx={{ minWidth: 80, textAlign: 'left', color: '#fff' }}>{match.awayTeam}</Typography>
+                          <Avatar src={match.awayShield} alt={match.awayTeam} sx={{ width: 32, height: 32, bgcolor: '#181A20' }} />
                         </Stack>
-                        <Chip label={match.status} size="small" color={
-                          match.status === 'Live' ? 'error' :
-                          match.status === 'Finished' ? 'success' :
-                          match.status === 'Upcoming' ? 'info' : 'default'
-                        } sx={{ minWidth: 80 }} />
+                        <Chip label={match.status} size="small" sx={{ minWidth: 80, bgcolor: match.status === 'Live' ? '#d32f2f' : match.status === 'Finished' ? '#388e3c' : match.status === 'Upcoming' ? '#1976d2' : '#23252B', color: '#fff', fontWeight: 700 }} />
                       </Stack>
                     }
                   />
                 </ListItem>
-                <Divider variant="inset" component="li" sx={{ ml: 2 }} />
+                <Divider variant="inset" component="li" sx={{ ml: 2, bgcolor: '#23252B' }} />
               </React.Fragment>
             ))}
           </List>
